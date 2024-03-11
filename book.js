@@ -6,10 +6,10 @@ function sumPublicationYears(books) {
     }
     return sum;
 }
-var myBooks = [
+var Books = [
     { title: "Metro 2033", author: "Dmitrij Głuchowski", publicationYear: 2015 },
     { title: "Pan Tadeusz", author: "Adam Mickiewicz", publicationYear: 1834 },
     { title: "Akademia pana Kleksa", author: "Jan Brzechwa", publicationYear: 1946 }
 ];
-var sumOfYears = sumPublicationYears(myBooks);
-console.log("Suma lat publikacji wszystkich książek:", sumOfYears);
+var sumYears = sumPublicationYears(Books);
+console.log("Suma lat publikacji wszystkich książek:", sumYears);

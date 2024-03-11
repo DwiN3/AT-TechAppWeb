@@ -12,11 +12,11 @@ function sumPublicationYears(books: Book[]): number {
     return sum;
 }
 
-const myBooks: Book[] = [
+const Books: Book[] = [
     { title: "Metro 2033", author: "Dmitrij Głuchowski", publicationYear: 2015 },
     { title: "Pan Tadeusz", author: "Adam Mickiewicz", publicationYear: 1834 },
     { title: "Akademia pana Kleksa", author: "Jan Brzechwa", publicationYear: 1946 }
 ];
 
-const sumOfYears = sumPublicationYears(myBooks);
-console.log("Suma lat publikacji wszystkich książek:", sumOfYears);
+const sumYears = sumPublicationYears(Books);
+console.log("Suma lat publikacji wszystkich książek:", sumYears);
