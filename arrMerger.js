@@ -13,8 +13,8 @@ function mergeArrays(arr1, arr2) {
 var arr1Num = [3, 152, 11];
 var arr2Num = [-4, 0, -256];
 var mergedArray = mergeArrays(arr1Num, arr2Num);
-console.log("Połączone:", mergedArray);
+console.log("Połączone tablice num: ", mergedArray);
 var arr1Str = ["cukier", "mleko", "płatki"];
 var arr2Str = ["widelec", "łyżka"];
 var mergedStringArray = mergeArrays(arr1Str, arr2Str);
-console.log("Połączone tablice: ", mergedStringArray);
+console.log("Połączone tablice str: ", mergedStringArray);

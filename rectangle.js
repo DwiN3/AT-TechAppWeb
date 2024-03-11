@@ -2,13 +2,13 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Rectangle = exports.Point = void 0;
 var Point = /** @class */ (function () {
-    function Point(_x, _y) {
-        this.x = _x;
-        this.y = _y;
+    function Point(x, y) {
+        this.x = x;
+        this.y = y;
     }
-    Point.prototype.move = function (_x, _y) {
-        this.x += _x;
-        this.y += _y;
+    Point.prototype.move = function (x, y) {
+        this.x += x;
+        this.y += y;
     };
     return Point;
 }());
@@ -39,6 +39,7 @@ var topRight = new Point(5, 1);
 var bottomLeft = new Point(1, 4);
 var bottomRight = new Point(5, 4);
 var rectangle = new Rectangle(topLeft, topRight, bottomLeft, bottomRight);
-console.log(rectangle.getArea());
+console.log('\nPole = ' + rectangle.getArea());
+console.log('Punkty:                 ', rectangle.topLeft);
 rectangle.move(2, 2);
-console.log(rectangle.topLeft);
+console.log('Punkty po przesunięciu: ', rectangle.topLeft);

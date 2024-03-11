@@ -2,14 +2,14 @@ export class Point {
     x:number;
     y:number;
 
-    constructor(_x:number, _y:number){
-        this.x = _x;
-        this.y = _y;
+    constructor(x:number, y:number){
+        this.x = x;
+        this.y = y;
     }
 
-    move(_x:number, _y:number) : void {
-        this.x += _x;
-        this.y += _y;
+    move(x:number, y:number) : void {
+        this.x += x;
+        this.y += y;
     }
 }
 
@@ -39,11 +39,10 @@ const topLeft = new Point(1, 1);
 const topRight = new Point(5, 1);
 const bottomLeft = new Point(1, 4);
 const bottomRight = new Point(5, 4);
-
 const rectangle = new Rectangle(topLeft, topRight, bottomLeft, bottomRight);
 
-console.log(rectangle.getArea());
+console.log('\nPole = '+rectangle.getArea());
 
+console.log('Punkty:                 ',rectangle.topLeft);
 rectangle.move(2, 2);
-
-console.log(rectangle.topLeft);
+console.log('Punkty po przesunięciu: ',rectangle.topLeft);
