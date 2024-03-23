@@ -33,6 +33,43 @@ const products = [
     { name: 'Tablet', price: 300 }
 ];
 
+app.get('/template/:variant/:a/:b', (request, response) => {
+    const a = parseFloat(request.params.a);
+    const b = parseFloat(request.params.b);
+    const variant = request.params.variant;
+    let result;
+    let symbol;
+
+    if (isNaN(a) || isNaN(b)) {
+        return response.status(400).send('One or both of the parameters are not numbers');
+    }
+
+    if (variant === "sum"){
+        result = a + b;
+        symbol = "+";
+    } 
+    else if (variant === "sub"){
+        result = a - b;
+        symbol = "-";
+    } 
+    else if (variant === "mul"){
+        result = a * b;
+        symbol = "*";
+    } 
+    else if (variant === "div") {
+        if (b === 0) {
+            return response.status(400).send('Division by zero is not allowed');
+        }
+        result = a / b;
+        symbol = "/";
+    }
+    else {
+        return response.status(400).send('Incorrect operation');
+    }
+
+    response.render(__dirname + '/result.html', { variant, a, b, result, symbol });
+});
+
 app.listen(config.port, function () {
 console.info(`Server is running at port 3000`);
 });
