@@ -24,8 +24,14 @@ const dataChart2 = service.convertData(temp);
 const chart2 = JSON.stringify(dataChart2);
 
 app.get('/', (request, response) => {
-    response.render(__dirname + '/index.html', {subject: 'Technologie aplikacji webowych', chart1: JSON.stringify(chart1), chart2: chart2})
+    response.render(__dirname + '/index.html', {subject: 'Technologie aplikacji webowych', chart1: JSON.stringify(chart1), chart2: chart2, products: products})
 })
+
+const products = [
+    { name: 'Laptop', price: 1000 },
+    { name: 'Smartphone', price: 500 },
+    { name: 'Tablet', price: 300 }
+];
 
 app.listen(config.port, function () {
 console.info(`Server is running at port 3000`);

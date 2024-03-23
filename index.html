@@ -99,6 +99,20 @@
     </div>
 
 </section>
+
+<table>
+    <tr>
+        <th>Nazwa produktu</th>
+        <th>Cena</th>
+    </tr>
+    <% products.forEach(function(product) { %>
+    <tr>
+        <td><%= product.name %></td>
+        <td><%= product.price %></td>
+    </tr>
+    <% }); %>
+    </table>
+
 <footer>
     <p class="copy">Copyrights &copy; | 2024</p>
 </footer>
@@ -140,6 +154,26 @@
     };
 
     new Chart(ctx, configChart2);
+
+    // Produkty
+    const productsData = '<%- JSON.stringify(products) %>';
+    const products = JSON.parse(productsData);
+
+    const tableBody = document.querySelector('tbody');
+
+    products.forEach(function(product) {
+        const row = document.createElement('tr');
+        const nameCell = document.createElement('td');
+        const priceCell = document.createElement('td');
+        
+        nameCell.textContent = product.name;
+        priceCell.textContent = product.price;
+
+        row.appendChild(nameCell);
+        row.appendChild(priceCell);
+        
+        tableBody.appendChild(row);
+    });
 </script>
     
 </body>
