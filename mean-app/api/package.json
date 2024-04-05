@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "ts-node ./lib/index.ts",
+    "dev": "ts-node ./lib/public/index.ts",
     "build": "tsc"
   },    
   "dependencies": {
