@@ -3,8 +3,8 @@ import Controller from '../interfaces/controller.interface';
 
 let testArr = [4, 5, 6, 3, 5, 3, 7, 5, 13, 5, 6, 4, 3, 6, 3, 6];
 
-class PostController implements Controller {
-    public path = '/api/post';
+class DataController implements Controller {
+    public path = '/api/data';
     public router = Router();
 
     constructor() {
@@ -27,4 +27,4 @@ class PostController implements Controller {
     };
 }
 
-export default PostController;
+export default DataController;
