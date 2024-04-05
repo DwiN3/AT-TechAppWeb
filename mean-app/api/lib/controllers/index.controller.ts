@@ -1,5 +1,5 @@
-import Controller from '../interfaces/controller.interface';
 import {Request, Response, NextFunction, Router} from 'express';
+import Controller from '../interfaces/controller.interface';
 import path from 'path';
 
 class IndexController implements Controller {
