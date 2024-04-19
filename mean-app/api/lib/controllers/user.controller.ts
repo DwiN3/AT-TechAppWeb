@@ -22,6 +22,7 @@ class UserController implements Controller {
         this.router.post(`${this.path}/create`, this.createNewOrUpdate);
         this.router.post(`${this.path}/auth`, this.authenticate);
         this.router.delete(`${this.path}/logout/:userId`, auth, this.removeHashSession);
+        this.router.post(`${this.path}/reset-password/:userId`, auth, this.resetPassword);
     }
 
     private authenticate = async (request: Request, response: Response, next: NextFunction) => {
@@ -40,6 +41,25 @@ class UserController implements Controller {
                 console.error(`Validation Error: ${error.message}`);
                 response.status(401).json({error: 'Unauthorized'});
             }
+    };
+
+    private resetPassword = async (request: Request, response: Response, next: NextFunction) => {
+        const { userId } = request.params;
+        const { newPassword } = request.body;
+    
+        try {
+            const hashedPassword = await this.passwordService.hashPassword(newPassword);
+            
+            await this.passwordService.createOrUpdate({
+                userId,
+                password: hashedPassword
+            });
+    
+            response.status(200).json({ message: 'Password reset successfully' });
+        } catch (error) {
+            console.error(`Error resetting password: ${error.message}`);
+            response.status(500).json({ error: 'Internal server error' });
+        }
     };
 
     private createNewOrUpdate = async (request: Request, response: Response, next: NextFunction) => {
