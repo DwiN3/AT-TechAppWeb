@@ -1,7 +1,7 @@
 import Controller from '../interfaces/controller.interface';
 import {Request, Response, NextFunction, Router} from 'express';
-//import {auth} from '../middlewares/auth.middleware';
-//import {admin} from '../middlewares/admin.middleware';
+import {auth} from '../middlewares/auth.middleware';
+import {admin} from '../middlewares/admin.middleware';
 import UserService from "../modules/services/user.service";
 import PasswordService from "../modules/services/password.service";
 import TokenService from "../modules/services/token.service";
@@ -21,11 +21,10 @@ class UserController implements Controller {
     private initializeRoutes() {
         this.router.post(`${this.path}/create`, this.createNewOrUpdate);
         this.router.post(`${this.path}/auth`, this.authenticate);
-        this.router.delete(`${this.path}/logout/:userId`, this.removeHashSession);
+        this.router.delete(`${this.path}/logout/:userId`, auth, this.removeHashSession);
     }
 
-    private authenticate = async (request: Request, response:
-        Response, next: NextFunction) => {
+    private authenticate = async (request: Request, response: Response, next: NextFunction) => {
             const {login, password} = request.body;
             try {
                 const user = await
@@ -41,7 +40,7 @@ class UserController implements Controller {
                 console.error(`Validation Error: ${error.message}`);
                 response.status(401).json({error: 'Unauthorized'});
             }
-        };
+    };
 
     private createNewOrUpdate = async (request: Request, response: Response, next: NextFunction) => {
         const userData = request.body;
@@ -67,7 +66,7 @@ class UserController implements Controller {
         const {userId} = request.params
         try {
             const result = await this.tokenService.remove(userId);
-            response.status(200).send(result);
+            response.status(200).json(result);
         } catch (error) {
             console.error(`Validation Error: ${error.message}`);
             response.status(401).json({error: 'Unauthorized'});
