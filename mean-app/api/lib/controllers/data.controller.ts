@@ -1,10 +1,11 @@
 import { Request, Response, NextFunction, Router } from 'express';
 import Controller from '../interfaces/controller.interface';
+import { checkPostCount } from "../middlewares/checkPostCount.middleware";
 
 let testArr = [4, 5, 6, 3, 5, 3, 7, 5, 13, 5, 6, 4, 3, 6, 3, 6];
 
 class DataController implements Controller {
-    public path = '/api';
+    public path = '/api/post';
     public router = Router();
 
     constructor() {
@@ -12,12 +13,15 @@ class DataController implements Controller {
     }
 
     private initializeRoutes() {
-        this.router.get(`${this.path}/post/:id`, this.getPost);
-        this.router.post(`${this.path}/post`, this.addPost);
-        this.router.delete(`${this.path}/post/:id`, this.deletePost);
-        this.router.post(`${this.path}/post/:num`, this.getNumPosts);
-        this.router.get(`${this.path}/posts`, this.getAllPosts);
-        this.router.delete(`${this.path}/posts`, this.deleteAllPost);
+        this.router.post(`${this.path}`, this.addPost);
+
+        this.router.get(`${this.path}/:id`, this.getPost);
+        this.router.get(`${this.path}s`, this.getAllPosts);
+        //this.router.post(`${this.path}/:num`, this.getNumPosts);
+        this.router.post(`${this.path}/:num`, checkPostCount, this.getNumPosts);
+        
+        this.router.delete(`${this.path}:id`, this.deletePost);
+        this.router.delete(`${this.path}s`, this.deleteAllPost);
     }
 
     private getPost = async (request: Request, response: Response, next: NextFunction) => {
