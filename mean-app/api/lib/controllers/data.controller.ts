@@ -16,15 +16,16 @@ class DataController implements Controller {
 
     private initializeRoutes() {
         this.router.post(`${this.path}`, this.addPost);
+        this.router.post(`${this.path}/:num`, checkPostCount, this.getNumPosts);
 
         this.router.get(`${this.path}/:id`, this.getPostById);
-        //this.router.get(`${this.path}s`, this.getAllPosts);
-        //this.router.post(`${this.path}/:num`, checkPostCount, this.getNumPosts);
+        this.router.get(`${this.path}s`, this.getAllPosts);
         
-        this.router.delete(`${this.path}:id`, this.deletePost);
-        //this.router.delete(`${this.path}s`, this.deleteAllPost);
+        this.router.delete(`${this.path}:id`, this.deletePostById);
+        this.router.delete(`${this.path}s`, this.deleteAllPost);
     }
 
+    // POST
     private addPost = async (request: Request, response: Response, next: NextFunction) => {
         const {title, text, image} = request.body;
         const readingData = {
@@ -33,7 +34,7 @@ class DataController implements Controller {
             image
         };
         try {
-            await this.dataService.createPost(readingData);
+            await this.dataService.addPost(readingData);
             response.status(200).json(readingData);
         } catch (error) {
                 console.log('eeee', error)
@@ -42,39 +43,37 @@ class DataController implements Controller {
         }
     }
 
+    private getNumPosts = async (request: Request, response: Response, next: NextFunction) => {
+        const { num } = request.params;
+        const numData = await this.dataService.getNumPosts(num);
+        response.status(200).json(numData);
+    };    
+
+    // GET
     private getPostById = async (request: Request, response: Response, next: NextFunction) => {
         const { id } = request.params;
-        const allData = await this.dataService.query({_id: id});
-        response.status(200).json(allData);
+        const post = await this.dataService.getPostById({ _id: id });
+        response.status(200).json(post);
     }
-
-    private deletePost = async (request: Request, response: Response, next: NextFunction) => {
-        const { id } = request.params;
-        await this.dataService.deleteData({_id: id});
-        response.sendStatus(200);
+    
+    private getAllPosts = async (request: Request, response: Response, next: NextFunction) => {
+        const posts = await this.dataService.getAllPosts();
+        response.status(200).json(posts);
     };
 
-    // private getNumPosts = async (request: Request, response: Response, next: NextFunction) => {
-    //     const { num } = request.params;
-    //     const amount = Number(num);
-    
-    //     if (isNaN(amount) || amount <= 0 || amount > testArr.length) {
-    //         return response.status(400).json({ error: "Invalid number of posts." });
-    //     }
-    
-    //     const selectedPosts = testArr.slice(0, amount);
-    //     response.status(200).json(selectedPosts);
-    // };
-    
+    // DELETE
+    private deletePostById = async (request: Request, response: Response, next: NextFunction) => {
+        const { id } = request.params;
+        await this.dataService.deletePostById({_id: id});
+        response.status(200);
+    };
 
-    // private getAllPosts = async (request: Request, response: Response, next: NextFunction) => {
-    //     response.status(200).json(testArr);
-    // };
-
-    // private deleteAllPost = async (request: Request, response: Response, next: NextFunction) => {
-    //     testArr.splice(0, testArr.length);
-    //     response.status(200).json({ message: "All posts deleted." });
-    // };
+    private deleteAllPost = async (request: Request, response: Response, next: NextFunction) => {
+        const { id } = request.params;
+        await this.dataService.deleteAllPosts();
+        response.status(200);
+    };
+    
 }
 
 export default DataController;
