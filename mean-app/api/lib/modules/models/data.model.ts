@@ -7,4 +7,3 @@ export interface IData {
 export type Query<T> = {
     [key: string]: T;
 };
-
