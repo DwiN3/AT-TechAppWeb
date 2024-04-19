@@ -2,8 +2,10 @@ import { Request, Response, NextFunction, Router } from 'express';
 import Controller from '../interfaces/controller.interface';
 import { checkPostCount } from "../middlewares/checkPostCount.middleware";
 import DataService from '../modules/services/data.service'
+import Joi = require('joi');
 
 let testArr = [4, 5, 6, 3, 5, 3, 7, 5, 13, 5, 6, 4, 3, 6, 3, 6];
+
 
 class DataController implements Controller {
     public path = '/api/post';
@@ -28,16 +30,18 @@ class DataController implements Controller {
     // POST
     private addPost = async (request: Request, response: Response, next: NextFunction) => {
         const {title, text, image} = request.body;
-        const readingData = {
-            title,
-            text,
-            image
-        };
+
+        const schema = Joi.object({
+            title: Joi.string().required(),
+            text: Joi.string().required(),
+            image: Joi.string().uri().required()
+        });
+
         try {
-            await this.dataService.addPost(readingData);
-            response.status(200).json(readingData);
+            const validateDate = await schema.validateAsync({title, text, image});
+            await this.dataService.addPost(validateDate);
+            response.status(200).json(validateDate);
         } catch (error) {
-                console.log('eeee', error)
                 console.error(`Validation Error: ${error.message}`);
                 response.status(400).json({error: 'Invalid input data.'});
         }
