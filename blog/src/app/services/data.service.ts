@@ -77,10 +77,9 @@ const posts = [
   })
 
   export class DataService {
-    constructor() {
-  }
+    constructor() {}
 
-  public getAll() {
-    return posts;
-  }
+    public getAll() {
+      return posts;
+    }
 }
