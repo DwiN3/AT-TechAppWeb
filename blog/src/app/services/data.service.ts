@@ -1,4 +1,6 @@
 import { Injectable } from '@angular/core';
+import {HttpClient} from "@angular/common/http";
+
 
 const posts = [
   {
@@ -74,12 +76,15 @@ const posts = [
 
 @Injectable({
     providedIn: 'root'
-  })
+})
 
-  export class DataService {
-    constructor() {}
+export class DataService {
 
-    public getAll() {
-      return posts;
-    }
+  private url = 'http://localhost:3000';
+  
+  constructor(private http: HttpClient) {}
+  
+  getAll() {
+    return this.http.get(this.url + '/api/posts');
+  }
 }
