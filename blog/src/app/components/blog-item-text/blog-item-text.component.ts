@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
-import { SummaryPipe } from '../../pipes/summary.pipe';
-import { RouterModule } from '@angular/router';
+import {SummaryPipe} from "../../pipes/summary.pipe";
+import {RouterModule} from "@angular/router";
 
 @Component({
   selector: 'blog-item-text',
@@ -11,4 +11,5 @@ import { RouterModule } from '@angular/router';
 })
 export class BlogItemTextComponent {
   @Input() text?: string;
+  @Input() id?: number;
 }
