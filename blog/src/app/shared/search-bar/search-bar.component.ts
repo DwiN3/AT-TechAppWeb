@@ -1,11 +1,12 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
-import {FormsModule} from "@angular/forms";
+import {FormsModule } from "@angular/forms";
 import { Router, ActivatedRoute } from '@angular/router';
+import { TextFormatDirective } from '../../directives/text-format.directive';
 
 @Component({
   selector: 'search-bar',
   standalone: true,
-  imports: [FormsModule],
+  imports: [FormsModule, TextFormatDirective],
   templateUrl: './search-bar.component.html',
   styleUrl: './search-bar.component.css'
 })
