@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { SearchBarComponent } from '../../shared/search-bar/search-bar.component'; 
 import {BlogComponent} from "../blog/blog.component";
 
@@ -11,7 +11,7 @@ import {BlogComponent} from "../blog/blog.component";
 })
 
 export class BlogHomeComponent implements OnInit {
-  public filterText: string = '';
+  @Input() filterText: string = '';
   
   constructor() {}
   
