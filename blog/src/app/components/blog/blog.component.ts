@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {DataService} from "../../services/data.service";
 import {BlogItemComponent} from"../blog-item/blog-item.component";
 import {CommonModule} from "@angular/common";
@@ -15,7 +15,8 @@ import {HttpClientModule} from "@angular/common/http";
 
 export class BlogComponent implements OnInit {
   public items$: any;
-  
+  @Input() filterText: string = '';
+
   constructor(private service: DataService) {}
   
   ngOnInit() {
