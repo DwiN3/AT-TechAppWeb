@@ -1,5 +1,6 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {FormsModule} from "@angular/forms";
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'search-bar',
@@ -13,11 +14,20 @@ export class SearchBarComponent implements OnInit {
   public filterText: string = '';
   @Output() name = new EventEmitter<string>();
   
-  constructor() {}
+  constructor(private router: Router, private route: ActivatedRoute){ }
+    
   
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.route.queryParams.subscribe(params => {
+    this.filterText = params['name'];
+      this.sendFilter();
+    });
+  }  
   
-  sendFilter(): void {
-    this.name.emit(this.filterText);
-  }
+  sendFilter() {
+      this.router.navigate(['/'], {queryParams: {name:
+      this.filterText?.toLowerCase()
+    }});
+      this.name.emit(this.filterText);
+    }  
 }
