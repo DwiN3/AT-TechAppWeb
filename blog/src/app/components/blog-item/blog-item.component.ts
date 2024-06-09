@@ -12,5 +12,5 @@ import {BlogItemTextComponent} from "../blog-item-text/blog-item-text.component"
 export class BlogItemComponent {
   @Input() image?: string;
   @Input() text?: string;
-  @Input() id: number|undefined;
+  @Input() id?: number;
 }
