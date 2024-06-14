@@ -9,19 +9,16 @@ export const admin = (request: Request, response: Response, next: NextFunction) 
         if (token.startsWith('Bearer ')) {
             token = token.slice(7, token.length);
         }
-        try {
-            jwt.verify(token, config.JwtSecret, (err, decoded) =>{
-                const user: IUser = decoded as IUser;
-                if (!user.isAdmin) {
-                    return response.status(403).send('Access denied.');
-                }
-                next();
-            });
-        } catch (ex) {
-            return response.status(400).send('Invalid token.');
-        }
-    } 
-    else {
+        jwt.verify(token, config.JwtSecret, (err, decoded) =>{
+            if (err) {
+                return response.status(400).send('Invalid token.'); 
+            }
+            const user: IUser = decoded as IUser;
+
+            next();
+        });
+    } else {
         return response.status(401).send('Access denied. No token provided.');
     }
 };
+

@@ -1,7 +1,6 @@
 import Controller from '../interfaces/controller.interface';
 import {Request, Response, NextFunction, Router} from 'express';
 import {auth} from '../middlewares/auth.middleware';
-import {admin} from '../middlewares/admin.middleware';
 import UserService from "../modules/services/user.service";
 import PasswordService from "../modules/services/password.service";
 import TokenService from "../modules/services/token.service";
@@ -47,23 +46,30 @@ class UserController implements Controller {
         }
     };
 
-    private authenticate = async (request: Request, response: Response, next: NextFunction) => {
-            const {login, password} = request.body;
-            try {
-                const user = await
-                this.userService.getByEmailOrName(login);
-                if (!user) {
-                    response.status(401).json({error: 'Unauthorized'});
-                }
-                await this.passwordService.authorize(user.id, await
-                this.passwordService.hashPassword(password));
-                const token = await this.tokenService.create(user);
-                response.status(200).json(this.tokenService.getToken(token));
-            } catch (error) {
-                console.error(`Validation Error: ${error.message}`);
-                response.status(401).json({error: 'Unauthorized'});
+    private authenticate = async (req: Request, res: Response, next: NextFunction) => {
+        const { login, password } = req.body;
+
+        try {
+            const user = await this.userService.getByEmailOrName(login);
+            if (!user) {
+                res.status(401).json({ error: 'User Not found' });
+                return;
             }
-    };
+
+            const authorized = await this.passwordService.authorize(user.id, password);
+
+            if(!authorized) {
+                res.status(401).json({message: "Invalid password"});
+                return;
+            }
+
+            const token = await this.tokenService.create(user);
+            res.status(200).json(this.tokenService.getToken(token));
+        } catch (error) {
+            console.error(`Validation Error: ${error.message}`);
+            res.status(500).json({ error: 'UNKNOWN ERROR' });
+        }
+    }
 
     private resetPassword = async (request: Request, response: Response, next: NextFunction) => {
         const { userId } = request.params;
