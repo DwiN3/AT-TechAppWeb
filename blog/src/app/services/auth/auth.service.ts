@@ -1,7 +1,7 @@
 import {Inject, Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {JwtHelperService} from "@auth0/angular-jwt";
-import {map} from 'rxjs/operators';
+import { catchError, map, throwError } from 'rxjs';
 import {Token} from "../../models/model";
 import {DOCUMENT} from "@angular/common";
 
@@ -13,19 +13,30 @@ export class AuthService {
   private url = 'http://localhost:3100/api';
   constructor(private http: HttpClient, @Inject(DOCUMENT) private document: Document) {}
   
-  authenticate(credentials: any) {
+  authenticate(credentials: any) {   
     const localStorage = this.document.defaultView?.localStorage;
-    return this.http.post(this.url + '/user/auth', {
-      login: credentials.login,
-      password: credentials.password
-    }).pipe(
+
+    return this.http.post(
+      this.url + '/user/auth', 
+      {
+        login: credentials.login,
+        password: credentials.password
+      }
+    ).pipe(
+      catchError((err, caught) => {
+        console.error(err);
+        const error = new Error(err.message);
+        return throwError(() => error);
+      }),
       map((result: Token | any) => {
-        if (result && result.token) {
+        console.log(result);
+        
+        if(result && result.token) {
           localStorage?.setItem('token', result.token);
           return true;
         }
         return false;
-      })
+      }),
     );
   }
 

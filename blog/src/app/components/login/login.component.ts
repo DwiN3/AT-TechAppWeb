@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {AuthService} from "../../services/auth/auth.service";
 import {Router} from "@angular/router";
+import { catchError, of } from 'rxjs';
 import {FormsModule} from "@angular/forms";
 
 @Component({
@@ -15,28 +16,40 @@ import {FormsModule} from "@angular/forms";
 export class LoginComponent implements OnInit {
   public credentials = {
     login: '',
-    password: ''
-  };
+    password: '',
+  }
+
+  public errorMessage = "";
 
   public logged?: boolean;
   public logout?: boolean;
-  constructor(public authService: AuthService, private router: Router) { }
 
-  ngOnInit(): void { }
-  
-  signIn() {
-    return
-    this.authService.authenticate(this.credentials).subscribe((result) => {
-      if (!result) {
-        this.logged = false;
-      } else {
-        this.logout = false;
-        this.credentials = {
-          login: '',
-          password: ''
-        };
-        this.router.navigate(['/']);
+  constructor(public authService: AuthService, private router: Router) {}
+  ngOnInit(): void {}
+
+  signIn() {   
+    this.authService.authenticate(this.credentials)
+    .pipe(
+      catchError((error) => (this.handleAuthError(error)))
+    )
+    .subscribe(
+      (result) => {   
+        if(!result) {
+          this.logged = false;             
+        } else {
+          this.logout = false;
+          this.credentials = {
+            password: '',
+            login: ''
+          };
+          this.router.navigate(['/']);          
+        }
       }
-    });
+  );
+  }
+
+  handleAuthError(error: Error) {
+    this.errorMessage = error.message;
+    return of(false);    
   }
 }

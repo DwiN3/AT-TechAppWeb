@@ -22,10 +22,10 @@ export const routes: Routes = [
     {
         path: 'blog',
         loadComponent: () => import('./components/blog-home/blog-home.component').then(m => m.BlogHomeComponent), 
-        canActivate: [authGuard]
+        //canActivate: [authGuard]
     },
     {
-        path: 'blog/details/:id',
+        path: 'blog/detail/:id',
         loadComponent: () => import('./components/blog-item-details/blog-item-details.component').then(m => m.BlogItemDetailsComponent)
     }
 ];
