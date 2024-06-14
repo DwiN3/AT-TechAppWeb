@@ -7,10 +7,10 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
-                    <a class="nav-link" href="#" [routerLink]="['/blog']">Posty</a>
+                    <a class="nav-link" href="#" [routerLink]="['/blog']" style="margin-left: 5px;">Posty</a>
                 </li>
-                <li *ngIf="authService.isLoggedIn()" class="nav-item">
-                    <a class="nav-link" href="#">Dodaj post</a>
+                <li class="nav-item">
+                    <a class="nav-link" href="#" [routerLink]="'/create-post'" style="margin-left: 5px;">Utwórz post</a>
                 </li>
             </ul>
             <div class="d-flex">

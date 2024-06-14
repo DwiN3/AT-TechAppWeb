@@ -4,6 +4,7 @@ import {BlogHomeComponent} from "./components/blog-home/blog-home.component";
 import {HomeComponent} from "./components/home/home.component";
 import {LoginComponent} from './components/login/login.component';
 import {SignupComponent} from './components/signup/signup.component';
+import {CreatePostComponent} from './components/create-post/create-post.component';
 import {authGuard} from "./services/auth/auth.guard";
 
 export const routes: Routes = [
@@ -27,5 +28,10 @@ export const routes: Routes = [
     {
         path: 'blog/detail/:id',
         loadComponent: () => import('./components/blog-item-details/blog-item-details.component').then(m => m.BlogItemDetailsComponent)
+    },
+    {
+        path: 'create-post',
+
+        loadComponent: () => import('./components/create-post/create-post.component').then(m => m.CreatePostComponent)
     }
 ];
