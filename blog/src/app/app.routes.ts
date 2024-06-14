@@ -9,23 +9,23 @@ import {authGuard} from "./services/auth/auth.guard";
 export const routes: Routes = [
     {
         path: '',
-        component: HomeComponent
-    },
-    {
-        path: 'blog',
-        component: BlogHomeComponent,
-        canActivate: [authGuard]
-    },
-    {
-        path: 'blog/detail/:id',
-        component: BlogItemDetailsComponent
+        loadComponent: () => import('./components/home/home.component').then(m => m.HomeComponent)
     },
     {
         path: 'login',
-        component: LoginComponent
+        loadComponent: () => import('./components/login/login.component').then(m => m.LoginComponent)
     },
     {
         path: 'signup',
-        component: SignupComponent
-    }  
+        loadComponent: () => import('./components/signup/signup.component').then(m => m.SignupComponent)
+    },
+    {
+        path: 'blog',
+        loadComponent: () => import('./components/blog-home/blog-home.component').then(m => m.BlogHomeComponent), 
+        canActivate: [authGuard]
+    },
+    {
+        path: 'blog/details/:id',
+        loadComponent: () => import('./components/blog-item-details/blog-item-details.component').then(m => m.BlogItemDetailsComponent)
+    }
 ];
