@@ -1,13 +1,18 @@
 <div class="container">
-    <form action="post" autocomplete="off" method="POST">
-        <div class="input-group">
-            <input [(ngModel)]="credentials.login" type="text" class="form-control"name="username" placeholder="Nazwa" title="Login">
-        </div>
-        <div class="input-group">
-            <input [(ngModel)]="credentials.password" type="password" class="form-control" name="password" placeholder="Hasło" title="Password">
-        </div>
-        <button (click)="signIn()" class="btn btn-primary" type="submit" title="Przycisk zaloguj">
-            Sign in
-        </button>
-    </form>
+    <h1 class="entry-title"><span>Zaloguj się</span></h1><hr>
+    <div class="form-container">
+        <form action="post" autocomplete="off" method="POST">
+            <div class="form-group form-input">
+                <label class="control-label col-sm-3">Nazwa<span class="text-danger"></span></label>
+                <input [(ngModel)]="credentials.login" type="text" class="form-control" name="username" title="Login">
+            </div>
+            <div class="form-group form-input">
+                <label class="control-label col-sm-3">Hasło<span class="text-danger"></span></label>
+                <input [(ngModel)]="credentials.password" type="password" class="form-control" name="password" title="Password">
+            </div>
+            <button (click)="signIn()" class="btn btn-primary form-input" type="submit" title="Przycisk zaloguj">
+                Zaloguj się
+            </button>
+        </form>
+    </div>
 </div>
