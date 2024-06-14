@@ -25,8 +25,8 @@ export class BlogItemDetailsComponent implements OnInit {
     });
     
     this.service.getById(id).subscribe((res: any) => {
-    this.image = res['image'];
-    this.text = res['text'];
+    this.image = res[0].image;
+    this.text = res[0].text;
     });
   }
 }
