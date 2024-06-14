@@ -2,6 +2,8 @@ import {Routes} from '@angular/router';
 import {BlogItemDetailsComponent} from "./components/blog-item-details/blog-item-details.component";
 import {BlogHomeComponent} from "./components/blog-home/blog-home.component";
 import {HomeComponent} from "./components/home/home.component";
+import {LoginComponent} from './components/login/login.component';
+import {SignupComponent} from './components/signup/signup.component';
 import {authGuard} from "./services/auth/auth.guard";
 
 export const routes: Routes = [
@@ -17,5 +19,13 @@ export const routes: Routes = [
     {
         path: 'blog/detail/:id',
         component: BlogItemDetailsComponent
-    }
+    },
+    {
+        path: 'login',
+        component: LoginComponent
+    },
+    {
+        path: 'signup',
+        component: SignupComponent
+    }  
 ];
