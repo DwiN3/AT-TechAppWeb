@@ -23,6 +23,7 @@ export class AuthService {
       map((result: Token | any) => {
         if (result && result.token) {
           localStorage?.setItem('token', result.token);
+          localStorage?.setItem('userName', result.userName);
           return true;
         }
         return false;
@@ -54,6 +55,7 @@ export class AuthService {
     }
     return !(jwtHelper.isTokenExpired(token));
   }
+  
 
   get currentUser() {
     const token = this.getToken();
@@ -68,4 +70,9 @@ export class AuthService {
     const localStorage = this.document.defaultView?.localStorage;
     return localStorage?.getItem('token');
   }
+
+  getUserName(): string | null {
+    const localStorage = this.document.defaultView?.localStorage;
+    return localStorage?.getItem('userName') ?? null;
+  }  
 }

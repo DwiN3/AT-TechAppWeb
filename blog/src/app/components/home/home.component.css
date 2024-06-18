@@ -10,9 +10,11 @@ h1 {
 }
 p {
     color: #666666;
+    font-size: 20px; 
+    margin-top: 10px;
 }
 footer {
-    margin-top: 20px;
+    margin-top: 35px;
     font-size: 0.8em;
     color: #999999;
 }

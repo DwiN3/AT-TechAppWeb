@@ -21,27 +21,15 @@ export class LoginComponent implements OnInit {
   public logged?: boolean;
   public logout?: boolean;
 
-  constructor(public authService: AuthService,
-              private router: Router) {
-  }
+  constructor(public authService: AuthService, private router: Router) {}
 
-
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
   signIn() {
-    return this.authService.authenticate(this.credentials).subscribe((result) => {
-      if (!result) {
-        this.logged = false;
-      } else {
-        this.logout = false;
-        this.credentials = {
-          login: '',
-          password: ''
-        };
+    this.authService.authenticate(this.credentials).subscribe((result) => {
+      if (result) {
         this.router.navigate(['/']);
       }
     });
   }
-
 }

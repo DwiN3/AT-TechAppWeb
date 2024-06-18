@@ -14,17 +14,18 @@ function create(context) {
     let userData;
     const user = await UserDAO.getByEmailOrName(name);
     if (!user) {
-      throw applicationException.new(applicationException.UNAUTHORIZED, 'User with that email does not exist');
+        throw applicationException.new(applicationException.UNAUTHORIZED, 'User with that email does not exist');
     }
     userData = await user;
     await PasswordDAO.authorize(user.id, hashString(password));
     const token = await TokenDAO.create(userData);
-    return getToken(token);
-  }
+    return getToken(token, userData.name); 
+}
 
-  function getToken(token) {
-    return {token: token.value};
-  }
+function getToken(token, userName) {
+    return { token: token.value, userName: userName };
+}
+
 
   async function createNewOrUpdate(userData) {
     const user = await UserDAO.createNewOrUpdate(userData);
