@@ -1,14 +1,15 @@
-import { Component } from '@angular/core';
-import {FormsModule} from "@angular/forms";
-import {DataService} from "../../services/data.service";
-import {Router} from "@angular/router";
+import { Component, Renderer2 } from '@angular/core';
+import { FormsModule } from "@angular/forms";
+import { DataService } from "../../services/data.service";
+import { Router } from "@angular/router";
+import { ChangeDetectorRef } from '@angular/core';
 
 @Component({
   selector: 'app-create-post',
   standalone: true,
   imports: [FormsModule],
   templateUrl: './create-post.component.html',
-  styleUrl: './create-post.component.css'
+  styleUrls: ['./create-post.component.css']
 })
 export class CreatePostComponent {
   post = {
@@ -16,7 +17,9 @@ export class CreatePostComponent {
     image: '',
     text: ''
   };
-  constructor(private dataService: DataService, private router: Router) {}
+  imageUrl: string | undefined;
+
+  constructor(private dataService: DataService, private router: Router, private renderer: Renderer2, private cdr: ChangeDetectorRef) {}
 
   addPost() {
     this.dataService.addPost(this.post).subscribe(response => {
@@ -24,5 +27,19 @@ export class CreatePostComponent {
     }, error => {
       console.error('Error adding post', error);
     });
+  }
+
+  displayImage() {
+    this.imageUrl = this.post.image;
+    console.log('Display Image URL:', this.imageUrl);
+    this.updateImageSrc();
+    this.cdr.detectChanges();  // Force Angular to run change detection
+  }
+
+  updateImageSrc() {
+    const imgElement = document.querySelector('.image-container img');
+    if (imgElement) {
+      this.renderer.setAttribute(imgElement, 'src', this.imageUrl || '');
+    }
   }
 }
