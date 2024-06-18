@@ -33,7 +33,7 @@ export class CreatePostComponent {
     this.imageUrl = this.post.image;
     console.log('Display Image URL:', this.imageUrl);
     this.updateImageSrc();
-    this.cdr.detectChanges();  // Force Angular to run change detection
+    this.cdr.detectChanges();
   }
 
   updateImageSrc() {

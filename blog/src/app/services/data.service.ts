@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {HttpClient} from "@angular/common/http";
+import {HttpClient} from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
@@ -20,8 +20,6 @@ export class DataService {
   }
   
   addPost(post: any) {
-    return this.http.post(this.url+ '/api/posts', post)
+    return this.http.post(this.url + '/api/posts', post);
   }
-
 }
-
