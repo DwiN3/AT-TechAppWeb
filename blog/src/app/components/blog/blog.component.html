@@ -2,9 +2,10 @@
   <div class="col-md-4" *ngFor="let item of items$ | filter:filterText">
     <div class="card">
       <blog-item
+        [title]="item.title"
         [image]="item.image"
         [text]="item.text"
-        [id]="item._id">
+        [id]="item.id">
       </blog-item>
     </div>
   </div>

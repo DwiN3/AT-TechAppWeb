@@ -8,5 +8,5 @@ import { Component, Input } from '@angular/core';
   styleUrl: './blog-item-image.component.css'
 })
 export class BlogItemImageComponent {
-  @Input() image?: string;
+  @Input() image?: string = '';
 }

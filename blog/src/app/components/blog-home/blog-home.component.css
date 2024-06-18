@@ -1,11 +1,10 @@
 .container {
     width: 100%;
     height: 100%;
-    margin-top: 20px;
 }
+
 .main {
-    width: 100%;
-    min-height: 100%;
+    width: 60%;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -14,10 +13,17 @@
     position: relative;
   }
 
-.content {
+.blog {
     display: flex;
     justify-content: space-around;
     width: 100%;
     max-width:750px;
     margin-bottom: 4rem;
+}
+
+.content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }

@@ -10,7 +10,9 @@ import {BlogItemTextComponent} from "../blog-item-text/blog-item-text.component"
   styleUrl: './blog-item.component.css'
 })
 export class BlogItemComponent {
+  @Input() title?: string;
   @Input() image?: string;
   @Input() text?: string;
-  @Input() id?: number;
+  @Input() id?: string;
 }
+

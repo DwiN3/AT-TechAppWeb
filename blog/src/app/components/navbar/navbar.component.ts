@@ -12,16 +12,18 @@ import {CommonModule} from "@angular/common";
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.css'
 })
-
 export class NavbarComponent implements OnInit {
-  constructor(public authService: AuthService, public router: Router) {}
+  constructor(public authService: AuthService, public router: Router) {
+  }
 
-    ngOnInit(): void {}
+  ngOnInit(): void {
+  }
 
-    signOut() {
-      this.authService.logout().subscribe((result: any) => {
-        this.router.navigate(['/']);
-        return result;
-      });
-    }
-} 
+  signOut() {
+    this.authService.logout().subscribe((result: any) => {
+      this.router.navigate(['/']);
+      return result;
+    });
+  }
+
+}

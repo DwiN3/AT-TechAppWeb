@@ -1,42 +1,32 @@
 import {Inject, Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {JwtHelperService} from "@auth0/angular-jwt";
-import { catchError, map, throwError } from 'rxjs';
-import {Token} from "../../models/model";
+import {map} from 'rxjs/operators';
+import {Token} from "../../models/token";
 import {DOCUMENT} from "@angular/common";
 
 @Injectable({
   providedIn: 'root'
 })
-
 export class AuthService {
-  private url = 'http://localhost:3100/api';
-  constructor(private http: HttpClient, @Inject(DOCUMENT) private document: Document) {}
-  
-  authenticate(credentials: any) {   
-    const localStorage = this.document.defaultView?.localStorage;
 
-    return this.http.post(
-      this.url + '/user/auth', 
-      {
-        login: credentials.login,
-        password: credentials.password
-      }
-    ).pipe(
-      catchError((err, caught) => {
-        console.error(err);
-        const error = new Error(err.message);
-        return throwError(() => error);
-      }),
+  private url = 'http://localhost:3001/api';
+
+  constructor(private http: HttpClient, @Inject(DOCUMENT) private document: Document) {
+  }
+  authenticate(credentials: any) {
+    const localStorage = this.document.defaultView?.localStorage;
+    return this.http.post(this.url + '/user/auth', {
+      login: credentials.login,
+      password: credentials.password
+    }).pipe(
       map((result: Token | any) => {
-        console.log(result);
-        
-        if(result && result.token) {
+        if (result && result.token) {
           localStorage?.setItem('token', result.token);
           return true;
         }
         return false;
-      }),
+      })
     );
   }
 
@@ -48,10 +38,11 @@ export class AuthService {
   logout() {
     const localStorage = this.document.defaultView?.localStorage;
     return this.http.delete(this.url + '/user/logout/' + this.currentUser.userId)
-    .pipe(map(() => {
-      localStorage?.removeItem('token');
-    })
-    );
+      .pipe(
+        map(() => {
+          localStorage?.removeItem('token');
+        })
+      );
   }
 
   isLoggedIn() {
@@ -69,6 +60,7 @@ export class AuthService {
     if (!token) {
       return null;
     }
+
     return new JwtHelperService().decodeToken(token);
   }
 
@@ -77,4 +69,3 @@ export class AuthService {
     return localStorage?.getItem('token');
   }
 }
-

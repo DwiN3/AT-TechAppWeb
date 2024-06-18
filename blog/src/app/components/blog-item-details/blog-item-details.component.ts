@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {DataService} from "../../services/data.service";
 import {HttpClientModule} from "@angular/common/http";
+
 @Component({
   selector: 'blog-item-details',
   standalone: true,
@@ -10,23 +11,27 @@ import {HttpClientModule} from "@angular/common/http";
   templateUrl: './blog-item-details.component.html',
   styleUrl: './blog-item-details.component.css'
 })
-
 export class BlogItemDetailsComponent implements OnInit {
   public image: string = '';
   public text: string = '';
-  
-  constructor(private service: DataService, private route: ActivatedRoute) {}
+  public title: string = '';
+
+  constructor(private service: DataService, private route: ActivatedRoute) {
+  }
+
   ngOnInit() {
     let id: string = '';
     this.route.paramMap
-    
-    .subscribe((params: any) => {
-      id = params.get('id');
-    });
-    
+      .subscribe((params: any) => {
+        id = params.get('id');
+        console.log("ID: "+id)
+      });
+
     this.service.getById(id).subscribe((res: any) => {
-    this.image = res[0].image;
-    this.text = res[0].text;
+      const post = res;
+      this.title = post['title'];
+      this.image = post['image'];
+      this.text = post['text'];
     });
   }
 }

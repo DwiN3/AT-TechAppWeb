@@ -10,6 +10,7 @@ import {RouterModule} from "@angular/router";
   styleUrl: './blog-item-text.component.css'
 })
 export class BlogItemTextComponent {
+  @Input() title?: string;
   @Input() text?: string;
-  @Input() id?: number;
+  @Input() id?: string;
 }
