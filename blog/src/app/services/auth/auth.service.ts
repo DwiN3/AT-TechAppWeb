@@ -23,7 +23,6 @@ export class AuthService {
       map((result: Token | any) => {
         if (result && result.token) {
           localStorage?.setItem('token', result.token);
-          localStorage?.setItem('userName', result.userName);
           return true;
         }
         return false;

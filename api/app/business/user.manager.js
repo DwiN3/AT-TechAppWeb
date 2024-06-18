@@ -19,11 +19,11 @@ function create(context) {
     userData = await user;
     await PasswordDAO.authorize(user.id, hashString(password));
     const token = await TokenDAO.create(userData);
-    return getToken(token, userData.name); 
+    return getToken(token); 
 }
 
-function getToken(token, userName) {
-    return { token: token.value, userName: userName };
+function getToken(token) {
+    return { token: token.value };
 }
 
 

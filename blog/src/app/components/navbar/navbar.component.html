@@ -18,7 +18,7 @@
                   <a class="nav-link" href="#" [routerLink]="['/login']">Logowanie</a>
                   <a class="nav-link" style="margin-left: 15px; margin-right: 20px;" href="#" [routerLink]="['/signup']">Rejestracja</a>
               </div>
-              <button *ngIf="authService.isLoggedIn()" class="btn nav-link" (click)="signOut()">Wyloguj</button>
+              <button *ngIf="authService.isLoggedIn()" class="btn nav-link" style="margin-right: 20px;" (click)="signOut()">Wyloguj</button>
           </div>
       </div>
   </div>
