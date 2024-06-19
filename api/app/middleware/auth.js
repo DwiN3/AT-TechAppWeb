@@ -11,8 +11,7 @@ const auth = (req, res, next) => {
   try {
     req.user = jwt.verify(token, config.JwtSecret);
     next();
-  }
-  catch (ex) {
+  } catch (ex) {
     res.status(400).send('Invalid token.');
   }
 };

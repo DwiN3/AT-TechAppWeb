@@ -12,8 +12,8 @@ export class AuthService {
 
   private url = 'http://localhost:3001/api';
 
-  constructor(private http: HttpClient, @Inject(DOCUMENT) private document: Document) {
-  }
+  constructor(private http: HttpClient, @Inject(DOCUMENT) private document: Document) {}
+
   authenticate(credentials: any) {
     const localStorage = this.document.defaultView?.localStorage;
     return this.http.post(this.url + '/user/auth', {
@@ -23,6 +23,7 @@ export class AuthService {
       map((result: Token | any) => {
         if (result && result.token) {
           localStorage?.setItem('token', result.token);
+          localStorage?.setItem('isAdmin', result.isAdmin);
           return true;
         }
         return false;
@@ -41,6 +42,7 @@ export class AuthService {
       .pipe(
         map(() => {
           localStorage?.removeItem('token');
+          localStorage?.removeItem('isAdmin');
         })
       );
   }
@@ -54,7 +56,6 @@ export class AuthService {
     }
     return !(jwtHelper.isTokenExpired(token));
   }
-  
 
   get currentUser() {
     const token = this.getToken();
@@ -73,5 +74,10 @@ export class AuthService {
   getUserName(): string | null {
     const localStorage = this.document.defaultView?.localStorage;
     return localStorage?.getItem('userName') ?? null;
+  }
+
+  isAdmin(): boolean {
+    const localStorage = this.document.defaultView?.localStorage;
+    return localStorage?.getItem('isAdmin') === 'true';
   }  
 }

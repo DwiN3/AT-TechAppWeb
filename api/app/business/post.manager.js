@@ -22,10 +22,18 @@ function create(context) {
         }
     }
 
+    async function deletePost(id) {
+        let result = await postDAO.delete(id);
+        if (result) {
+            return result;
+        }
+    }
+
     return {
         query: query,
         get: get,
         createNewOrUpdate: createNewOrUpdate,
+        delete: deletePost,
     };
 }
 

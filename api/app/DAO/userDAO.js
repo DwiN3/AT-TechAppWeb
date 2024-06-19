@@ -5,7 +5,6 @@ import applicationException from '../service/applicationException';
 import mongoConverter from '../service/mongoConverter';
 import uniqueValidator from 'mongoose-unique-validator';
 
-
 const userRole = {
   admin: 'admin',
   user: 'user'
@@ -16,9 +15,9 @@ const userRoles = [userRole.admin, userRole.user];
 const userSchema = new mongoose.Schema({
   email: { type: String, required: true, unique: true },
   name: { type: String, required: true, unique: true },
-  role: { type: String, enum: userRoles, default: userRole.admin, required: false },
+  role: { type: String, enum: userRoles, default: userRole.user, required: false },
   active: { type: Boolean, default: true, required: false },
-  isAdmin: { type: Boolean, default: true, required: false }
+  isAdmin: { type: Boolean, default: false, required: false }
 }, {
   collection: 'user'
 });
@@ -30,7 +29,7 @@ const UserModel = mongoose.model('user', userSchema);
 function createNewOrUpdate(user) {
   return Promise.resolve().then(() => {
     if (!user.id) {
-      return new  UserModel(user).save().then(result => {
+      return new UserModel(user).save().then(result => {
         if (result) {
           return mongoConverter(result);
         }
@@ -72,7 +71,6 @@ export default {
   getByEmailOrName: getByEmailOrName,
   get: get,
   removeById: removeById,
-
   userRole: userRole,
   model: UserModel
 };

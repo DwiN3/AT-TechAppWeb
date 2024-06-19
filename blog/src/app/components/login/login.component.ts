@@ -1,17 +1,16 @@
 import {Component, OnInit} from '@angular/core';
+import {AuthService} from '../../services/auth/auth.service';
+import {Router} from '@angular/router';
 import {Inject} from '@angular/core';
-import {DOCUMENT} from "@angular/common";
-import {AuthService} from "../../services/auth/auth.service";
-import {Router} from "@angular/router";
-import {FormsModule} from "@angular/forms";
+import {DOCUMENT} from '@angular/common';
+import {FormsModule} from '@angular/forms';
 
 @Component({
-  selector: 'login',
+  selector: 'app-login',
   standalone: true,
   imports: [FormsModule],
-  providers: [AuthService],
   templateUrl: './login.component.html',
-  styleUrl: './login.component.css'
+  styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
 
