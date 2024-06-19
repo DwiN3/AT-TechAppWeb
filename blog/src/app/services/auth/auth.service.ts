@@ -28,7 +28,9 @@ export class AuthService {
             localStorage?.setItem('token', result.token);
             const decodedToken: any = jwtDecode(result.token);
             const role = decodedToken?.role || 'user';
+            const email = decodedToken?.name || '';
             localStorage?.setItem('role', role);
+            localStorage?.setItem('email', email);
             return true;
           }
           return false;
@@ -81,8 +83,13 @@ export class AuthService {
     return localStorage?.getItem('username') ?? null;
   }
 
-  isAdmin(): boolean {
+  getRole(): boolean {
     const localStorage = this.document.defaultView?.localStorage;
     return localStorage?.getItem('role') === 'admin';
+  }  
+
+  getEmail(): string | null {
+    const localStorage = this.document.defaultView?.localStorage;
+    return localStorage?.getItem('email') ?? null;
   }  
 }
