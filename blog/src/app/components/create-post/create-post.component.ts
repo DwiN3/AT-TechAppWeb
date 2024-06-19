@@ -31,7 +31,6 @@ export class CreatePostComponent {
 
   displayImage() {
     this.imageUrl = this.post.image;
-    console.log('Display Image URL:', this.imageUrl);
     this.updateImageSrc();
     this.cdr.detectChanges();
   }

@@ -35,9 +35,7 @@ export class BlogItemComponent {
   removePost() {
     if (this.id != null) {
       this.dataService.removePost(this.id).subscribe(response => {
-      }, error => {
-        console.error('Error removing post', error);
-      });
+      }, error => {});
     }
     window.location.reload(); 
   }

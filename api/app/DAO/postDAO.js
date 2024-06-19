@@ -25,7 +25,6 @@ async function query() {
 
 async function get(id) {
     return PostModel.findOne({_id: id}).then(function (result) {
-        console.log(id)
         if (result) {
             return mongoConverter(result);
         }

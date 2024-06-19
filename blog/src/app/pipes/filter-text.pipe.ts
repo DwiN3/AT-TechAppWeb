@@ -7,8 +7,6 @@ import {Pipe, PipeTransform} from '@angular/core';
 export class FilterTextPipe implements PipeTransform {
 
   transform(value: any[], filterText: any): any {
-    console.log(value, filterText)
-
     if (!value) {
       return [];
     }

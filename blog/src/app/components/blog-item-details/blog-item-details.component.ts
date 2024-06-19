@@ -37,7 +37,6 @@ export class BlogItemDetailsComponent implements OnInit {
     this.route.paramMap
       .subscribe((params: any) => {
         this.id = params.get('id');
-        console.log("ID: "+this.id)
       });
 
     this.service.getById(this.id).subscribe((res: any) => {
@@ -51,9 +50,7 @@ export class BlogItemDetailsComponent implements OnInit {
   removePost() {
     if (this.id != null) {
       this.service.removePost(this.id).subscribe(response => {
-      }, error => {
-        console.error('Error removing post', error);
-      });
+      }, error => {});
       this.router.navigate(['/blog']);
     }
   }

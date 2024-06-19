@@ -32,7 +32,6 @@ export class AuthService {
   }
 
   createOrUpdate(credentials: any) {
-    console.log(credentials)
     return this.http.post(this.url + '/user/create', credentials);
   }
 
