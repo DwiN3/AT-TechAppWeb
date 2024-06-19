@@ -83,7 +83,7 @@ export class AuthService {
     return localStorage?.getItem('username') ?? null;
   }
 
-  getRole(): boolean {
+  isAdmin(): boolean {
     const localStorage = this.document.defaultView?.localStorage;
     return localStorage?.getItem('role') === 'admin';
   }  

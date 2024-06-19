@@ -26,7 +26,7 @@ export class BlogItemComponent implements OnInit {
     private authService: AuthService) { }
 
   ngOnInit(): void {
-    this.isAdmin = this.authService.getRole();
+    this.isAdmin = this.authService.isAdmin();
   }
 
   removePost() {

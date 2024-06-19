@@ -29,7 +29,7 @@ export class BlogItemDetailsComponent implements OnInit {
     private router: Router) {}
 
   ngOnInit() {
-    this.isAdmin = this.authService.getRole();
+    this.isAdmin = this.authService.isAdmin();
 
     this.route.paramMap
       .subscribe((params: any) => {
