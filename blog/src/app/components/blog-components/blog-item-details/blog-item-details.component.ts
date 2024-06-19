@@ -3,8 +3,8 @@ import { ActivatedRoute } from '@angular/router';
 import { HttpClientModule } from "@angular/common/http";
 import { CommonModule } from "@angular/common";
 import { Router } from "@angular/router";
-import { DataService } from "../../services/data.service";
-import { AuthService } from '../../services/auth/auth.service';
+import { DataService } from "../../../services/post/post.service";
+import { AuthService } from '../../../services/auth/auth.service';
 
 @Component({
   selector: 'blog-item-details',

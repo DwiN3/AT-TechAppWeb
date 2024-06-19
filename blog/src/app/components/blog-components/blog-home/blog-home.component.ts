@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClientModule } from "@angular/common/http";
-import { SearchBarComponent } from "../search-bar/search-bar.component";
+import { SearchBarComponent } from "../../search-bar/search-bar.component";
 import { BlogComponent } from "../blog/blog.component";
 
 @Component({

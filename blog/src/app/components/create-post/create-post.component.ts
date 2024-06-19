@@ -2,7 +2,7 @@ import { Component, Renderer2 } from '@angular/core';
 import { FormsModule } from "@angular/forms";
 import { Router } from "@angular/router";
 import { ChangeDetectorRef } from '@angular/core';
-import { DataService } from "../../services/data.service";
+import { DataService } from "../../services/post/post.service";
 
 @Component({
   selector: 'app-create-post',

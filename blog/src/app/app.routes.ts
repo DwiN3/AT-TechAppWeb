@@ -16,12 +16,12 @@ export const routes: Routes = [
   },
   {
     path: 'blog',
-    loadComponent: () => import('./components/blog-home/blog-home.component').then(m => m.BlogHomeComponent),
+    loadComponent: () => import('./components/blog-components/blog-home/blog-home.component').then(m => m.BlogHomeComponent),
     canActivate: [authGuard]
   },
   {
     path: 'blog/detail/:id',
-    loadComponent: () => import('./components/blog-item-details/blog-item-details.component').then(m => m.BlogItemDetailsComponent),
+    loadComponent: () => import('./components/blog-components/blog-item-details/blog-item-details.component').then(m => m.BlogItemDetailsComponent),
     canActivate: [authGuard]
   },
   {

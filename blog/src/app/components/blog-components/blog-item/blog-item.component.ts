@@ -2,8 +2,8 @@ import { Component, Input } from '@angular/core';
 import { CommonModule } from "@angular/common";
 import { BlogItemImageComponent } from "../blog-item-image/blog-item-image.component";
 import { BlogItemTextComponent } from "../blog-item-text/blog-item-text.component";
-import { AuthService } from '../../services/auth/auth.service';
-import { DataService } from "../../services/data.service";
+import { AuthService } from '../../../services/auth/auth.service';
+import { DataService } from "../../../services/post/post.service";
 
 @Component({
   selector: 'blog-item',

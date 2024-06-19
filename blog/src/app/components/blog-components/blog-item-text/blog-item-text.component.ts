@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { RouterModule } from "@angular/router";
-import { SummaryPipe } from "../../pipes/summary.pipe";
+import { SummaryPipe } from "../../../pipes/summary/summary.pipe";
 
 @Component({
   selector: 'blog-item-text',
