@@ -1,8 +1,8 @@
 import { Component, Renderer2 } from '@angular/core';
 import { FormsModule } from "@angular/forms";
-import { DataService } from "../../services/data.service";
 import { Router } from "@angular/router";
 import { ChangeDetectorRef } from '@angular/core';
+import { DataService } from "../../services/data.service";
 
 @Component({
   selector: 'app-create-post',
@@ -17,9 +17,14 @@ export class CreatePostComponent {
     image: '',
     text: ''
   };
+
   imageUrl: string | undefined;
 
-  constructor(private dataService: DataService, private router: Router, private renderer: Renderer2, private cdr: ChangeDetectorRef) {}
+  constructor(
+    private dataService: DataService, 
+    private router: Router, 
+    private renderer: Renderer2, 
+    private cdr: ChangeDetectorRef) {}
 
   addPost() {
     this.dataService.addPost(this.post).subscribe(response => {

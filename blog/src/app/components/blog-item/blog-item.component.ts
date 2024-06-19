@@ -1,8 +1,8 @@
 import { Component, Input } from '@angular/core';
+import { CommonModule } from "@angular/common";
 import { BlogItemImageComponent } from "../blog-item-image/blog-item-image.component";
 import { BlogItemTextComponent } from "../blog-item-text/blog-item-text.component";
 import { AuthService } from '../../services/auth/auth.service';
-import { CommonModule } from "@angular/common";
 import { DataService } from "../../services/data.service";
 
 @Component({
@@ -22,9 +22,8 @@ export class BlogItemComponent {
   public isAdmin?: boolean;
 
   constructor(
-    public authService: AuthService,
-    private dataService: DataService
-  ) { }
+    private authService: AuthService,
+    private dataService: DataService) { }
 
   ngOnInit(): void {
     if (this.authService.isLoggedIn()) {

@@ -1,7 +1,7 @@
-import {Component, OnInit} from '@angular/core';
-import {AuthService} from "../../services/auth/auth.service";
-import {Router} from "@angular/router";
-import {FormsModule} from "@angular/forms";
+import { Component, OnInit } from '@angular/core';
+import { Router } from "@angular/router";
+import { FormsModule } from "@angular/forms";
+import { AuthService } from "../../services/auth/auth.service";
 
 @Component({
   selector: 'app-signup',
@@ -19,11 +19,11 @@ export class SignupComponent implements OnInit {
     password: '',
   };
 
-  constructor(private authService: AuthService, public router: Router) {
-  }
+  constructor(
+    private authService: AuthService, 
+    public router: Router) {}
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
   create() {
     this.authService.createOrUpdate(this.credentials).subscribe((result) => {

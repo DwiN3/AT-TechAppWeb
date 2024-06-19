@@ -1,8 +1,8 @@
-import {Component, OnInit} from '@angular/core';
-import {AuthService} from "../../services/auth/auth.service";
-import {Router, RouterModule} from "@angular/router";
-import {FormsModule} from "@angular/forms";
-import {CommonModule} from "@angular/common";
+import { Component, OnInit } from '@angular/core';
+import { Router, RouterModule } from "@angular/router";
+import { FormsModule } from "@angular/forms";
+import { CommonModule } from "@angular/common";
+import { AuthService } from "../../services/auth/auth.service";
 
 @Component({
   selector: 'app-navbar',
@@ -13,11 +13,11 @@ import {CommonModule} from "@angular/common";
   styleUrl: './navbar.component.css'
 })
 export class NavbarComponent implements OnInit {
-  constructor(public authService: AuthService, public router: Router) {
-  }
+  constructor(
+    public authService: AuthService, 
+    public router: Router) {}
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
   signOut() {
     this.authService.logout().subscribe((result: any) => {
@@ -25,5 +25,4 @@ export class NavbarComponent implements OnInit {
       return result;
     });
   }
-
 }

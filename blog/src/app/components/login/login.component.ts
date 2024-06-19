@@ -1,9 +1,9 @@
-import {Component, OnInit} from '@angular/core';
-import {AuthService} from '../../services/auth/auth.service';
-import {Router} from '@angular/router';
-import {Inject} from '@angular/core';
-import {DOCUMENT} from '@angular/common';
-import {FormsModule} from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { Inject } from '@angular/core';
+import { DOCUMENT } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { AuthService } from '../../services/auth/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -22,7 +22,10 @@ export class LoginComponent implements OnInit {
   public logged?: boolean;
   public logout?: boolean;
 
-  constructor(public authService: AuthService, private router: Router, @Inject(DOCUMENT) private document: Document) {}
+  constructor(
+    public authService: AuthService, 
+    private router: Router, 
+    @Inject(DOCUMENT) private document: Document) {}
 
   ngOnInit(): void {}
 

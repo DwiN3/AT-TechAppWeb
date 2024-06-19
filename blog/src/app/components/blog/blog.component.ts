@@ -1,15 +1,14 @@
-import {Component, OnInit, Input} from '@angular/core';
-import {DataService} from "../../services/data.service";
-import {BlogItemComponent} from "../blog-item/blog-item.component";
-import {CommonModule} from "@angular/common";
-import {HttpClientModule} from "@angular/common/http";
-import {SearchBarComponent} from "../search-bar/search-bar.component";
-import {FilterTextPipe} from "../../pipes/filter-text.pipe";
+import { Component, OnInit, Input } from '@angular/core';
+import { CommonModule } from "@angular/common";
+import { DataService } from "../../services/data.service";
+import { BlogItemComponent } from "../blog-item/blog-item.component";
+import { SearchBarComponent } from "../search-bar/search-bar.component";
+import { FilterTextPipe } from "../../pipes/filter-text.pipe";
 
 @Component({
   selector: 'blog',
   standalone: true,
-  imports: [BlogItemComponent, CommonModule, SearchBarComponent, FilterTextPipe],
+  imports: [BlogItemComponent, CommonModule, SearchBarComponent, FilterTextPipe ],
   providers: [DataService],
   templateUrl: './blog.component.html',
   styleUrl: './blog.component.css'
@@ -17,11 +16,10 @@ import {FilterTextPipe} from "../../pipes/filter-text.pipe";
 export class BlogComponent implements OnInit {
 
   @Input() filterText: string = '';
-
   public items$: any;
 
-  constructor(private service: DataService) {
-  }
+  constructor(private service: DataService) { }
+
   ngOnInit() {
     this.getAll();
   }

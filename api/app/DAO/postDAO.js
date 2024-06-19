@@ -6,9 +6,9 @@ import * as _ from "lodash";
 const postSchema = new mongoose.Schema({
     title: {type: String},
     image: {type: String},
-    text: {type: String},
-}, {
-    collection: 'dp_post'
+    text: {type: String},   
+    }, {
+        collection: 'dp_post'
 });
 postSchema.plugin(uniqueValidator);
 

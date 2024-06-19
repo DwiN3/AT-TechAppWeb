@@ -3,13 +3,12 @@ import * as _ from 'lodash';
 import applicationException from '../service/applicationException';
 import mongoConverter from '../service/mongoConverter';
 
-
 const passwordSchema = new mongoose.Schema({
-  userId: { type: mongoose.Schema.Types.ObjectId, ref: 'user', required: true, unique: true },
-  password: { type: String, required: true }
-}, {
-  collection: 'password'
-});
+    userId: { type: mongoose.Schema.Types.ObjectId, ref: 'user', required: true, unique: true },
+    password: { type: String, required: true }
+  }, {
+    collection: 'password'
+  });
 
 const PasswordModel = mongoose.model('password', passwordSchema);
 

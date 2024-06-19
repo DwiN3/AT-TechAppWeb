@@ -1,25 +1,20 @@
 .form-container {
     max-width: 200px;
 }
-
 .form-input {
     margin-top: 15px;
     width: 400px;
 }
-
 .content {
     display: flex;
     justify-content: space-around;
     align-items: center;
 }
-
 .image{
     max-width: 380px; 
     max-height: 380px;
     border-radius: 30px;
 }
-
-
 .image-container {
     display: flex;
     justify-content: center;

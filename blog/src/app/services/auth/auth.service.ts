@@ -1,9 +1,9 @@
-import {Inject, Injectable} from '@angular/core';
-import {HttpClient} from '@angular/common/http';
-import {JwtHelperService} from "@auth0/angular-jwt";
-import {map} from 'rxjs/operators';
-import {Token} from "../../models/token";
-import {DOCUMENT} from "@angular/common";
+import { Inject, Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { JwtHelperService } from "@auth0/angular-jwt";
+import { map } from 'rxjs/operators';
+import { Token } from "../../models/token";
+import { DOCUMENT } from "@angular/common";
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +12,9 @@ export class AuthService {
 
   private url = 'http://localhost:3001/api';
 
-  constructor(private http: HttpClient, @Inject(DOCUMENT) private document: Document) {}
+  constructor(
+    private http: HttpClient, 
+    @Inject(DOCUMENT) private document: Document) {}
 
   authenticate(credentials: any) {
     const localStorage = this.document.defaultView?.localStorage;

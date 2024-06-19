@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {SearchBarComponent} from "../search-bar/search-bar.component";
-import {BlogComponent} from "../blog/blog.component";
-import {HttpClientModule} from "@angular/common/http";
+import { HttpClientModule } from "@angular/common/http";
+import { SearchBarComponent } from "../search-bar/search-bar.component";
+import { BlogComponent } from "../blog/blog.component";
 
 @Component({
   selector: 'blog-home',
@@ -15,14 +15,11 @@ export class BlogHomeComponent implements OnInit {
 
   public filterText: string = '';
 
-  constructor() {
-  }
+  constructor() {}
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
   getName($event: string): void {
     this.filterText = $event;
   }
 }
-

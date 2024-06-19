@@ -1,10 +1,10 @@
-import {Component, OnInit} from '@angular/core';
-import {ActivatedRoute} from '@angular/router';
-import {DataService} from "../../services/data.service";
-import { AuthService } from '../../services/auth/auth.service';
-import {HttpClientModule} from "@angular/common/http";
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { HttpClientModule } from "@angular/common/http";
 import { CommonModule } from "@angular/common";
-import {Router} from "@angular/router";
+import { Router } from "@angular/router";
+import { DataService } from "../../services/data.service";
+import { AuthService } from '../../services/auth/auth.service';
 
 @Component({
   selector: 'blog-item-details',
@@ -26,8 +26,7 @@ export class BlogItemDetailsComponent implements OnInit {
     private service: DataService, 
     private route: ActivatedRoute,
     public authService: AuthService,
-    private router: Router
-  ) {}
+    private router: Router) {}
 
   ngOnInit() {
     if (this.authService.isLoggedIn()) {

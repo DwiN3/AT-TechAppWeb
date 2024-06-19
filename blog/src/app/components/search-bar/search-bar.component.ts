@@ -1,8 +1,8 @@
-import {Component, EventEmitter, OnInit, Output} from
+import { Component, EventEmitter, OnInit, Output } from
     '@angular/core';
-import {FormsModule} from "@angular/forms";
-import {Router, ActivatedRoute} from '@angular/router';
-import {TextFormatDirective} from "../../directives/text-format.directive";
+import { FormsModule } from "@angular/forms";
+import { Router, ActivatedRoute } from '@angular/router';
+import { TextFormatDirective } from "../../directives/text-format.directive";
 
 @Component({
   selector: 'search-bar',
@@ -16,7 +16,9 @@ export class SearchBarComponent implements OnInit {
 
   @Output() name = new EventEmitter<string>();
 
-  constructor(private router: Router, private route: ActivatedRoute){ }
+  constructor(
+    private router: Router, 
+    private route: ActivatedRoute){ }
 
   ngOnInit(): void {
     this.route.queryParams.subscribe(params => {
@@ -30,6 +32,4 @@ export class SearchBarComponent implements OnInit {
           this.filterText?.toLowerCase()}});
     this.name.emit(this.filterText);
   }
-
 }
-

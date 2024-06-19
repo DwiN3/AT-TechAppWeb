@@ -1,5 +1,4 @@
 'use strict';
-
 import userManager from './user.manager';
 import postManager from './post.manager';
 
