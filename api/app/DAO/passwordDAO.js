@@ -13,12 +13,13 @@ const passwordSchema = new mongoose.Schema({
 const PasswordModel = mongoose.model('password', passwordSchema);
 
 async function createOrUpdate(data) {
-  const result = await PasswordModel.findOneAndUpdate({ userId: data.userId }, _.omit(data, 'id'), { new: true });
-  if (!result) {
-    const result = await new PasswordModel({ userId: data.userId, password: data.password }).save();
-    if (result) {
-      return mongoConverter(result);
-    }
+  const existingUser = await PasswordModel.findOne({ userId: data.userId });
+  if (existingUser) {
+    throw applicationException.new(applicationException.BAD_REQUEST, 'User with that ID already exists');
+  }
+  const result = await new PasswordModel({ userId: data.userId, password: data.password }).save();
+  if (result) {
+    return mongoConverter(result);
   }
   return result;
 }
