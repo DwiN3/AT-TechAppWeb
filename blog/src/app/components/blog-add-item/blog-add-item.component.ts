@@ -6,9 +6,7 @@ import {Router} from "@angular/router";
 @Component({
   selector: 'app-blog-add-item',
   standalone: true,
-  imports: [
-    FormsModule
-  ],
+  imports: [ FormsModule ],
   templateUrl: './blog-add-item.component.html',
   styleUrl: './blog-add-item.component.css'
 })

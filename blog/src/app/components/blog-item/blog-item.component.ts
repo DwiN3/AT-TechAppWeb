@@ -1,9 +1,9 @@
 import { Component, Input } from '@angular/core';
-import {BlogItemImageComponent} from "../blog-item-image/blog-item-image.component";
-import {BlogItemTextComponent} from "../blog-item-text/blog-item-text.component";
+import { BlogItemImageComponent } from "../blog-item-image/blog-item-image.component";
+import { BlogItemTextComponent } from "../blog-item-text/blog-item-text.component";
 import { AuthService } from '../../services/auth/auth.service';
 import { CommonModule } from "@angular/common";
-import {DataService} from "../../services/data.service";
+import { DataService } from "../../services/data.service";
 
 @Component({
   selector: 'blog-item',
@@ -21,8 +21,10 @@ export class BlogItemComponent {
 
   public isAdmin?: boolean;
 
-  constructor(public authService: AuthService, private dataService: DataService,) {
-  }
+  constructor(
+    public authService: AuthService,
+    private dataService: DataService
+  ) { }
 
   ngOnInit(): void {
     if (this.authService.isLoggedIn()) {
@@ -31,12 +33,12 @@ export class BlogItemComponent {
   }
 
   removePost() {
-    if(this.id != null){
+    if (this.id != null) {
       this.dataService.removePost(this.id).subscribe(response => {
       }, error => {
-        console.error('Error remove post', error);
+        console.error('Error removing post', error);
       });
     }
+    window.location.reload(); 
   }
 }
-
