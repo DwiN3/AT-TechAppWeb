@@ -39,7 +39,7 @@ const userEndpoint = (router) => {
         }
     });
 
-    router.delete('/api/user/remove/:userId', auth, async (request, response, next) => {
+    router.delete('/api/user/:userId', auth, async (request, response, next) => {
         try {
             const result = await business.getUserManager(request).removeUser(request.params.userId);
             response.status(200).send(result);

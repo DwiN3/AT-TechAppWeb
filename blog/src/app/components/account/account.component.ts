@@ -1,23 +1,28 @@
-import { Component } from '@angular/core';
-import { CommonModule } from "@angular/common";
+import { Component, OnInit } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { AuthService } from '../../services/auth/auth.service';
+import { FormsModule } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
-  selector: 'account',
+  selector: 'app-account',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, FormsModule],
   providers: [AuthService],
   templateUrl: './account.component.html',
-  styleUrl: './account.component.css'
+  styleUrls: ['./account.component.css']
 })
-export class AccountComponent {
+export class AccountComponent implements OnInit {
   public username: string | null;
   public email: string | null;
   public role: string | null;
-
+  public newPassword: string = '';
   public MessageText: string = '';
+  public isError: boolean = false; // Nowa zmienna
 
-  constructor(public authService: AuthService) {
+  constructor(
+    private authService: AuthService,
+    private router: Router) {
     this.username = null;
     this.email = null;
     this.role = null;
@@ -27,11 +32,34 @@ export class AccountComponent {
     if (this.authService.isLoggedIn()) {
       this.username = this.authService.getUserName();
       this.email = this.authService.getEmail();
-      if(this.authService.isAdmin()){
-        this.role = "Administrator";
-      } else {
-        this.role = "Użytkownik";
-      }
+      this.role = this.authService.isAdmin() ? 'Administrator' : 'Użytkownik';
     }
+  }
+
+  deleteAccount(): void {
+    this.authService.deleteAccount().subscribe(
+      () => {
+        this.MessageText = 'Konto zostało usunięte.';
+        this.isError = false;
+        this.router.navigate(['/']);
+      },
+      error => {
+        this.MessageText = 'Wystąpił błąd podczas usuwania konta.';
+        this.isError = true;
+      }
+    );
+  }
+
+  changePassword(): void {
+    this.authService.changePassword(this.newPassword).subscribe(
+      (result) => { 
+        this.MessageText = 'Hasło zostało zmienione.';
+        this.isError = false;
+      },
+      error => {
+        this.MessageText = 'Wystąpił błąd podczas zmiany hasła.';
+        this.isError = true;
+      }
+    );
   }
 }
