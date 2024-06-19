@@ -29,10 +29,17 @@ const UserModel = mongoose.model('user', userSchema);
 function createNewOrUpdate(user) {
   return Promise.resolve().then(() => {
     if (!user.id) {
-      return new UserModel(user).save().then(result => {
-        if (result) {
-          return mongoConverter(result);
+      return UserModel.findOne({
+        $or: [{ email: user.email }, { name: user.name }]
+      }).then(existingUser => {
+        if (existingUser) {
+          throw applicationException.new(applicationException.CONFLICT);
         }
+        return new UserModel(user).save().then(result => {
+          if (result) {
+            return mongoConverter(result);
+          }
+        });
       });
     } else {
       return UserModel.findByIdAndUpdate(user.id, _.omit(user, 'id'), { new: true });

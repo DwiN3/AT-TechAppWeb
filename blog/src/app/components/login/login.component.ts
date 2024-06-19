@@ -1,14 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Inject } from '@angular/core';
-import { DOCUMENT } from '@angular/common';
+import { CommonModule, DOCUMENT } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { AuthService } from '../../services/auth/auth.service';
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [FormsModule],
+  imports: [FormsModule, CommonModule],
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
@@ -21,6 +21,7 @@ export class LoginComponent implements OnInit {
 
   public logged?: boolean;
   public logout?: boolean;
+  public MessageText: string = '';
 
   constructor(
     public authService: AuthService, 
@@ -29,12 +30,21 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  signIn() {
+  login() {
+    this.MessageText = '';
     this.authService.authenticate(this.credentials).subscribe((result) => {
       if (result) {
         const localStorage = this.document.defaultView?.localStorage;
         localStorage?.setItem('userName', this.credentials.login);
         this.router.navigate(['/']);
+      }
+    }, error => {
+      if (error.status === 401) {
+        this.MessageText = 'Nieprawidłowe hasło.';
+      } else if (error.status === 404) {
+        this.MessageText = 'Użytkownik nie został znaleziony.';
+      } else {
+        this.MessageText = 'Wystąpił błąd. Spróbuj ponownie.';
       }
     });
   }

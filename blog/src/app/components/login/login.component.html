@@ -1,16 +1,19 @@
 <div class="container">
     <h1 class="entry-title"><span>Zaloguj się</span></h1><hr>
     <div class="form-container">
-        <form action="post" autocomplete="off" method="POST">
+        <div *ngIf="MessageText" class="alert alert-danger">
+            {{ MessageText }}
+        </div>
+        <form (ngSubmit)="login()" #loginForm="ngForm">
             <div class="form-group form-input">
-                <label class="control-label col-sm-3">Nazwa<span class="text-danger"></span></label>
-                <input [(ngModel)]="credentials.login" type="text" class="form-control" name="username" title="Login">
+                <label class="control-label col-sm-3">Nazwa</label>
+                <input [(ngModel)]="credentials.login" type="text" class="form-control" name="username" title="Login" required minlength="1">
             </div>
             <div class="form-group form-input">
-                <label class="control-label col-sm-3">Hasło<span class="text-danger"></span></label>
-                <input [(ngModel)]="credentials.password" type="password" class="form-control" name="password" title="Password">
+                <label class="control-label col-sm-3">Hasło</label>
+                <input [(ngModel)]="credentials.password" type="password" class="form-control" name="password" title="Password" required minlength="5" maxlength="15">
             </div>
-            <button (click)="signIn()" class="btn btn-primary form-input" type="submit" title="Przycisk zaloguj">
+            <button (click)="login()" class="btn btn-primary form-input" type="submit" title="Przycisk zaloguj" [disabled]="!loginForm.valid">
                 Zaloguj się
             </button>
         </form>

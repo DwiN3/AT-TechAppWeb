@@ -8,7 +8,7 @@ import { FilterTextPipe } from "../../pipes/filter-text.pipe";
 @Component({
   selector: 'blog',
   standalone: true,
-  imports: [BlogItemComponent, CommonModule, SearchBarComponent, FilterTextPipe ],
+  imports: [ BlogItemComponent, CommonModule, SearchBarComponent, FilterTextPipe ],
   providers: [DataService],
   templateUrl: './blog.component.html',
   styleUrl: './blog.component.css'
