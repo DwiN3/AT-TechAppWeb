@@ -15,13 +15,13 @@ const PasswordModel = mongoose.model('password', passwordSchema);
 async function createOrUpdate(data) {
   const existingUser = await PasswordModel.findOne({ userId: data.userId });
   if (existingUser) {
-    throw applicationException.new(applicationException.BAD_REQUEST, 'User with that ID already exists');
-  }
-  const result = await new PasswordModel({ userId: data.userId, password: data.password }).save();
-  if (result) {
+    existingUser.password = data.password;
+    const result = await existingUser.save();
+    return mongoConverter(result);
+  } else {
+    const result = await new PasswordModel({ userId: data.userId, password: data.password }).save();
     return mongoConverter(result);
   }
-  return result;
 }
 
 async function authorize(userId, password) {
@@ -32,9 +32,13 @@ async function authorize(userId, password) {
   throw applicationException.new(applicationException.UNAUTHORIZED, 'User and password does not match');
 }
 
-export default {
-  createOrUpdate: createOrUpdate,
-  authorize: authorize,
+async function removeByUserId(userId) {
+  return await PasswordModel.findOneAndRemove({ userId });
+}
 
+export default {
+  createOrUpdate,
+  authorize,
+  removeByUserId,
   model: PasswordModel
 };

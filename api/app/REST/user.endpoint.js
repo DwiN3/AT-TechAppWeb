@@ -30,7 +30,23 @@ const userEndpoint = (router) => {
         }
     });
 
+    router.post('/api/user/change-password/:userId', auth, async (request, response, next) => {
+        try {
+            const result = await business.getUserManager(request).changePassword(request.params.userId, request.body.newPassword);
+            response.status(200).send(result);
+        } catch (error) {
+            applicationException.errorHandler(error, response);
+        }
+    });
 
+    router.delete('/api/user/remove/:userId', auth, async (request, response, next) => {
+        try {
+            const result = await business.getUserManager(request).removeUser(request.params.userId);
+            response.status(200).send(result);
+        } catch (error) {
+            applicationException.errorHandler(error, response);
+        }
+    });
 };
 
 export default userEndpoint;

@@ -45,13 +45,27 @@ function create(context) {
     return await TokenDAO.remove(userId);
   }
 
+  async function changePassword(userId, newPassword) {
+    const hashedPassword = hashString(newPassword);
+    const result = await PasswordDAO.createOrUpdate({ userId, password: hashedPassword });
+    return result;
+  }
+
+  async function removeUser(userId) {
+    await UserDAO.removeById(userId);
+    await PasswordDAO.removeByUserId(userId);
+    return { message: 'User removed successfully' };
+  }
+
   return {
-    authenticate: authenticate,
-    createNewOrUpdate: createNewOrUpdate,
-    removeHashSession: removeHashSession
+    authenticate,
+    createNewOrUpdate,
+    removeHashSession,
+    changePassword,
+    removeUser
   };
 }
 
 export default {
-  create: create
+  create
 };
