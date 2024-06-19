@@ -35,7 +35,7 @@ export class LoginComponent implements OnInit {
     this.authService.authenticate(this.credentials).subscribe((result) => {
       if (result) {
         const localStorage = this.document.defaultView?.localStorage;
-        localStorage?.setItem('userName', this.credentials.login);
+        localStorage?.setItem('username', this.credentials.login);
         this.router.navigate(['/']);
       }
     }, error => {

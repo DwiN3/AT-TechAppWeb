@@ -4,6 +4,7 @@ import { JwtHelperService } from "@auth0/angular-jwt";
 import { map } from 'rxjs/operators';
 import { Token } from "../../models/token";
 import { DOCUMENT } from "@angular/common";
+import { jwtDecode } from "jwt-decode"
 
 @Injectable({
   providedIn: 'root'
@@ -16,22 +17,24 @@ export class AuthService {
     private http: HttpClient, 
     @Inject(DOCUMENT) private document: Document) {}
 
-  authenticate(credentials: any) {
-    const localStorage = this.document.defaultView?.localStorage;
-    return this.http.post(this.url + '/user/auth', {
-      login: credentials.login,
-      password: credentials.password
-    }).pipe(
-      map((result: Token | any) => {
-        if (result && result.token) {
-          localStorage?.setItem('token', result.token);
-          localStorage?.setItem('isAdmin', result.isAdmin);
-          return true;
-        }
-        return false;
-      })
-    );
-  }
+    authenticate(credentials: any) {
+      const localStorage = this.document.defaultView?.localStorage;
+      return this.http.post<Token>(`${this.url}/user/auth`, {
+        login: credentials.login,
+        password: credentials.password
+      }).pipe(
+        map((result: Token) => {
+          if (result && result.token) {
+            localStorage?.setItem('token', result.token);
+            const decodedToken: any = jwtDecode(result.token);
+            const role = decodedToken?.role || 'user';
+            localStorage?.setItem('role', role);
+            return true;
+          }
+          return false;
+        })
+      );
+    }
 
   createOrUpdate(credentials: any) {
     return this.http.post(this.url + '/user/create', credentials);
@@ -42,8 +45,9 @@ export class AuthService {
     return this.http.delete(this.url + '/user/logout/' + this.currentUser.userId)
       .pipe(
         map(() => {
+          localStorage?.removeItem('username');
           localStorage?.removeItem('token');
-          localStorage?.removeItem('isAdmin');
+          localStorage?.removeItem('role');
         })
       );
   }
@@ -74,11 +78,11 @@ export class AuthService {
 
   getUserName(): string | null {
     const localStorage = this.document.defaultView?.localStorage;
-    return localStorage?.getItem('userName') ?? null;
+    return localStorage?.getItem('username') ?? null;
   }
 
   isAdmin(): boolean {
     const localStorage = this.document.defaultView?.localStorage;
-    return localStorage?.getItem('isAdmin') === 'true';
+    return localStorage?.getItem('role') === 'admin';
   }  
 }

@@ -10,7 +10,7 @@ import { AuthService } from '../../../services/auth/auth.service';
   selector: 'blog-item-details',
   standalone: true,
   imports: [HttpClientModule, CommonModule],
-  providers: [DataService],
+  providers: [ DataService ],
   templateUrl: './blog-item-details.component.html',
   styleUrl: './blog-item-details.component.css'
 })
@@ -23,15 +23,13 @@ export class BlogItemDetailsComponent implements OnInit {
   public isAdmin?: boolean;
 
   constructor(
-    private service: DataService, 
+    private service: DataService,
+    private authService: AuthService, 
     private route: ActivatedRoute,
-    public authService: AuthService,
     private router: Router) {}
 
   ngOnInit() {
-    if (this.authService.isLoggedIn()) {
-      this.isAdmin = this.authService.isAdmin();
-    }
+    this.isAdmin = this.authService.isAdmin();
 
     this.route.paramMap
       .subscribe((params: any) => {
