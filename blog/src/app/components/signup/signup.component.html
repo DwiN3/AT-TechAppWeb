@@ -9,7 +9,7 @@
                 <label class="control-label col-sm-3">Nazwa<span class="text-danger">*</span></label>
                 <div class="col-md-8 col-sm-9">
                     <div class="input-group form-input">
-                        <input type="text" class="form-control" name="mem_name" id="mem_name" [(ngModel)]="credentials.name" required minlength="1">
+                        <input type="text" class="form-control" name="mem_name" id="mem_name" [(ngModel)]="credentials.name" required minlength="1" autocomplete="username">
                     </div>
                 </div>
             </div>
@@ -18,7 +18,7 @@
                 <div class="col-md-8 col-sm-9">
                     <div class="input-group form-input">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
-                        <input type="email" class="form-control" name="emailid" id="emailid" [(ngModel)]="credentials.email" required minlength="1">
+                        <input type="email" class="form-control" name="emailid" id="emailid" [(ngModel)]="credentials.email" required minlength="1" autocomplete="email">
                     </div>
                 </div>
             </div>
@@ -27,7 +27,7 @@
                 <div class="col-md-5 col-sm-8">
                     <div class="input-group form-input">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
-                        <input type="password" class="form-control" name="password" id="password" placeholder="5-15 znaków" [(ngModel)]="credentials.password" required minlength="5" maxlength="15">
+                        <input type="password" class="form-control" name="password" id="password" placeholder="5-15 znaków" [(ngModel)]="credentials.password" required minlength="5" maxlength="15" autocomplete="password">
                     </div>
                 </div>
             </div>
@@ -36,7 +36,7 @@
                 <div class="col-md-5 col-sm-8">
                     <div class="input-group form-input">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
-                        <input type="password" class="form-control" name="cpassword" id="cpassword" [(ngModel)]="repassword" required minlength="5">
+                        <input type="password" class="form-control" name="cpassword" id="cpassword" [(ngModel)]="repassword" required minlength="5" autocomplete="new-password">
                     </div>
                 </div>
             </div>
