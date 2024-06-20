@@ -59,9 +59,7 @@ export class AuthService {
   deleteAccount() {
     const localStorage = this.document.defaultView?.localStorage;
     const userId = this.currentUser?.userId;
-    const token = this.getToken();
-    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
-    return this.http.delete(`${this.url}/user/${userId}`, { headers }).pipe(
+    return this.http.delete(`${this.url}/user/${userId}`).pipe(
       map(() => {
         localStorage?.clear();
       })
@@ -69,11 +67,8 @@ export class AuthService {
   }
 
   changePassword(newPassword: string) {
-    const localStorage = this.document.defaultView?.localStorage;
     const userId = this.currentUser?.userId;
-    const token = this.getToken();
-    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
-    return this.http.post(`${this.url}/user/change-password/${userId}`, { newPassword }, { headers });
+    return this.http.post(`${this.url}/user/change-password/${userId}`, { newPassword });
   }
 
   isLoggedIn() {
