@@ -18,13 +18,11 @@ export class CreatePostComponent {
     text: ''
   };
 
-  imageUrl: string | undefined;
+  public imageUrl: string | undefined;
 
   constructor(
     private dataService: DataService, 
-    private router: Router, 
-    private renderer: Renderer2, 
-    private cdr: ChangeDetectorRef) {}
+    private router: Router) {}
 
   addPost() {
     this.dataService.addPost(this.post).subscribe(response => {
@@ -36,14 +34,5 @@ export class CreatePostComponent {
 
   displayImage() {
     this.imageUrl = this.post.image;
-    this.updateImageSrc();
-    this.cdr.detectChanges();
-  }
-
-  updateImageSrc() {
-    const imgElement = document.querySelector('.image-container img');
-    if (imgElement) {
-      this.renderer.setAttribute(imgElement, 'src', this.imageUrl || '');
-    }
   }
 }
