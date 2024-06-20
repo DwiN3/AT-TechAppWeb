@@ -17,10 +17,10 @@ const tokenSchema = new mongoose.Schema({
   type: { type: String, enum: tokenTypes, required: true },
   value: { type: String, required: true }
 }, {
-  collection: 'token'
+  collection: 'token_35196'
 });
 
-const TokenModel = mongoose.model('token', tokenSchema);
+const TokenModel = mongoose.model('token_35196', tokenSchema);
 
 async function create(user) {
   const access = 'auth';

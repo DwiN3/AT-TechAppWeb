@@ -7,10 +7,10 @@ const passwordSchema = new mongoose.Schema({
     userId: { type: mongoose.Schema.Types.ObjectId, ref: 'user', required: true, unique: true },
     password: { type: String, required: true }
   }, {
-    collection: 'password'
+    collection: 'password_35196'
   });
 
-const PasswordModel = mongoose.model('password', passwordSchema);
+const PasswordModel = mongoose.model('password_35196', passwordSchema);
 
 async function createOrUpdate(data) {
   const existingUser = await PasswordModel.findOne({ userId: data.userId });

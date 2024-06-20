@@ -26,13 +26,6 @@ function create(context) {
   }
 
   async function createNewOrUpdate(userData) {
-    if (!userData.hasOwnProperty('role')) {
-      userData.role = 'user';
-    }
-    if (!userData.hasOwnProperty('isAdmin')) {
-      userData.isAdmin = false;
-    }
-
     const user = await UserDAO.createNewOrUpdate(userData);
     if (await userData.password) {
       return await PasswordDAO.createOrUpdate({ userId: user.id, password: hashString(userData.password) });
