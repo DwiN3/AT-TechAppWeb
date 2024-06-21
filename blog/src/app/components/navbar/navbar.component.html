@@ -20,7 +20,7 @@
               </div>
               <i *ngIf="authService.isLoggedIn() && authService.isAdmin()" class="bi bi-person-fill icon" style="color: rgb(231, 218, 27)" [routerLink]="['/account']"></i>
               <i *ngIf="authService.isLoggedIn() && !authService.isAdmin()" class="bi bi-person-fill icon" style="color: black" [routerLink]="['/account']"></i>
-              <button *ngIf="authService.isLoggedIn()" class="btn nav-link" style="margin-right: 20px;" (click)="signOut()">Wyloguj</button>
+              <button *ngIf="authService.isLoggedIn()" class="btn nav-link" style="margin-right: 20px;" (click)="logout()">Wyloguj</button>
           </div>
       </div>
   </div>

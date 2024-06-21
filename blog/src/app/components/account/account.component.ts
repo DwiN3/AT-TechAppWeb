@@ -18,7 +18,7 @@ export class AccountComponent implements OnInit {
   public role: string | null;
   public newPassword: string = '';
   public MessageText: string = '';
-  public isError: boolean = false; // Nowa zmienna
+  public isError: boolean = false;
 
   constructor(
     private authService: AuthService,
